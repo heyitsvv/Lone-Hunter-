@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 8f;
     public float gravity = -30f;
 
+    public GameObject quest;
+    private QuestGiver questGiver;
+    private bool questActive = false;
+
     Rigidbody rb;
     Vector3 velocity;
 
@@ -20,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        quest.SetActive(questActive);
     }
 
     // Update is called once per frame
@@ -55,6 +60,13 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(6f * -2f * gravity);
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            questActive = !questActive;
+            quest.SetActive(questActive);
+        }
+
 
     }
 }
