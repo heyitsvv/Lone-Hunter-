@@ -148,3 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef8dc064320d964890695a5b6622918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  speed: 8
+  gravity: -30
+  jumpChecker: {fileID: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
