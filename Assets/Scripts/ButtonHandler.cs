@@ -18,6 +18,7 @@ public class ButtonHandler : MonoBehaviour
         if (button != null)
         {
             button.onClick.AddListener(OnClick);
+     
         }
     }
 

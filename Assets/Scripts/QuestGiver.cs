@@ -9,8 +9,8 @@ public class QuestGiver : MonoBehaviour
     public GameObject questPanel;
     private List<int> clickedButtonIndices = new List<int>();
 
-    private string[] animals = { "Wolf" };
-    private string[] description = { "Venture out into the wild and kill ", "Hunt ", "Kill ", "Shoot "};
+    private string[] animals = { "Wolf", "Bear", "Cattle" };
+    private string[] description = { "Venture out into the wild and kill ", "Hunt ", "Kill " };//, "Shoot "};
     private int iRandom;
 
 
@@ -27,7 +27,7 @@ public class QuestGiver : MonoBehaviour
         for (int i = 0; i < descText.Count; i++)
         {
             DisplayQuestDescription(i);
-    
+
         }
 
         questPanel.SetActive(questActive);
@@ -40,26 +40,26 @@ public class QuestGiver : MonoBehaviour
         DisplayQuestDescription(index);
     }
 
+
     public void ButtonClicked(int index)
     {
         if (!clickedButtonIndices.Contains(index))
         {
             clickedButtonIndices.Add(index);
-            Debug.Log("Button " + index + " was clicked!");
+            Debug.Log("Button " + index + " was clicked.");
 
         }
 
         CompleteQuest(index);
-
-        print("Button " + index);
     }
+
 
     // Display different description for each quests
     public void DisplayQuestDescription(int index)
     {
         if (string.IsNullOrWhiteSpace(descText[index].text))
         {
-            descText[index].text = description[index];
+            descText[index].text = description[index] + (index+1) + " " + animals[0];
         }
         else // Change the description when button is clicked
         {
