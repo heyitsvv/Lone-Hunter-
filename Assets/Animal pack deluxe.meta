@@ -1,6 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: e0e39ccd73ad6b04ab5afa61b51dbe16
 folderAsset: yes
+=======
+<<<<<<<< Updated upstream:Assets/MyScene.unity.meta
+guid: c56496d19eb66ce40900d0494cfc215a
+========
+guid: ff4ffe40b88d94f2b9eb88dcbb7ba82c
+folderAsset: yes
+>>>>>>>> Stashed changes:Assets/Animal pack deluxe.meta
+>>>>>>> Stashed changes
 DefaultImporter:
   externalObjects: {}
   userData: 

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: af873bf7e35e32542a7c8813a2b7a46f
+=======
+guid: c7e99fee79770f84d84eb3f9a3423df7
+>>>>>>> Stashed changes
 timeCreated: 1503919948
 licenseType: Store
 ModelImporter:
@@ -202,5 +206,9 @@ AssetOrigin:
   productId: 99702
   packageName: Animal pack deluxe
   packageVersion: 1.0
+<<<<<<< Updated upstream
   assetPath: Assets/Animations/Bear/Bear_Walk.fbx
+=======
+  assetPath: Assets/Animal pack deluxe/Animations/Bear_Walk.fbx
+>>>>>>> Stashed changes
   uploadId: 259818

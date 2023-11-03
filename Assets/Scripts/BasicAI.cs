@@ -9,10 +9,13 @@ public class BasicAI : MonoBehaviour
     public NavMeshAgent agent;
     private Animator anim;
 
+<<<<<<< Updated upstream
     [Header("Health Settings")]
     public int maxHealth = 100;
     public int currentHealth;
 
+=======
+>>>>>>> Stashed changes
     [Header("Attack Settings")]
     public float damage = 10f;
     public float attackCooldownTime = 1.0f; // Time between attacks
@@ -23,23 +26,36 @@ public class BasicAI : MonoBehaviour
     public float runSpeed = 3.5f;
     public float stoppingDistance = 2.0f; // Adjust this stopping distance
 
+<<<<<<< Updated upstream
+=======
+    private SphereCollider detectionCollider; // SphereCollider for detecting the player
+    private float maxChaseDistance; // Maximum chase distance based on collider radius
+
+>>>>>>> Stashed changes
     private bool isAttacking;
     private bool isWandering = true;
     private Vector3 currentDestination;
 
     private float currentWanderTime;
 
+<<<<<<< Updated upstream
     private SphereCollider detectionCollider; // SphereCollider for detecting the player
     private float maxChaseDistance; // Maximum chase distance based on collider radius
 
+=======
+>>>>>>> Stashed changes
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.stoppingDistance = stoppingDistance; // Set the stopping distance
         anim = GetComponent<Animator>();
+<<<<<<< Updated upstream
         detectionCollider = GetComponent<SphereCollider>(); // Get the SphereCollider component
 
         // Use the collider's radius to determine the maximum chase distance
+=======
+        detectionCollider = GetComponent<SphereCollider>();
+>>>>>>> Stashed changes
         maxChaseDistance = detectionCollider.radius;
 
         currentWanderTime = wanderWaitTime;
@@ -47,6 +63,10 @@ public class BasicAI : MonoBehaviour
         // Set the initial destination within the wander area
         SetRandomDestinationInSphere();
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     private void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -105,6 +125,7 @@ public class BasicAI : MonoBehaviour
         anim.SetBool("Run", !isWandering);
     }
 
+<<<<<<< Updated upstream
     public void TakeDamageFromLineRenderer(int damage)
     {
         if (currentHealth > 0)
@@ -122,10 +143,24 @@ public class BasicAI : MonoBehaviour
     }
 
 
+=======
+>>>>>>> Stashed changes
     public void StartAttack()
     {
         if (!isAttacking)
         {
+<<<<<<< Updated upstream
+=======
+            // Check if the player's health script is attached to the player object
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+            if (playerHealth != null && playerHealth.currentHealth > 0)
+            {
+                // Reduce the player's health
+                playerHealth.TakeDamage((int)damage);
+                Debug.Log("Player health reduced by: " + damage);
+            }
+
+>>>>>>> Stashed changes
             // Implement the attack cooldown timer
             isAttacking = true;
             StartCoroutine(ResetAttackCooldown());
@@ -167,12 +202,17 @@ public class BasicAI : MonoBehaviour
         }
     }
 
+<<<<<<< Updated upstream
+=======
+    // Helper function to get a random point within a sphere's bounds
+>>>>>>> Stashed changes
     private Vector3 RandomPointInSphere(Vector3 center, float radius)
     {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += center;
         return randomDirection;
     }
+<<<<<<< Updated upstream
 
     private void Die()
     {
@@ -184,3 +224,6 @@ public class BasicAI : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 }
+=======
+}
+>>>>>>> Stashed changes

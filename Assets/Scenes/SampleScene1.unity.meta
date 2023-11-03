@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Scenes/SampleScene1.unity.meta
 guid: a7002047679e38c4cb55d49fce02e3b2
+========
+guid: aa880617cc3401c40984069169470b45
+folderAsset: yes
+>>>>>>>> Stashed changes:Assets/Animal pack deluxe/Animations/Materials.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

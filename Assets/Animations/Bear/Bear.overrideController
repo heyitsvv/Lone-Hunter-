@@ -7,6 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bear
+<<<<<<< Updated upstream
   m_Controller: {fileID: 9100000, guid: f659e3faf5929aa41881aa69c5531f81, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 9b04eb3f13376b6449123f695dc70702, type: 2}
@@ -19,3 +20,17 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: af873bf7e35e32542a7c8813a2b7a46f, type: 3}
   - m_OriginalClip: {fileID: 7400000, guid: 00d6478c365db664ca85dceb8df5a426, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 6e8b43f1abfce6244b220c67fb6408a6, type: 3}
+=======
+  m_Controller: {fileID: 9100000, guid: 8b9c7c466adbbc043b363d8e15411e81, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8ff9acdceac96744da40de2b96a898ac, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6e8b43f1abfce6244b220c67fb6408a6, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 062a3f0c1ab3b144fb08a0f0975600ce, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 265af7dca6c1b8d478631c25b16ad537, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 193bbd1e6377ec7498d22b7bc96b5cb4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: af873bf7e35e32542a7c8813a2b7a46f, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 47abdfffdc7a6444a8c94c5c0bc3a2b8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f0de5c62a6c14df4c946f81e4cee9a01, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 1f3d26d71d280674c9d0ecee3362eb8c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d59d373e8fbb4d54ca949a031b0d4d4c, type: 3}
+>>>>>>> Stashed changes

@@ -3,16 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Animal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - hitLayer
   - Water
   - UI
+<<<<<<< Updated upstream
   - 
   - 
+=======
+  - Ground
+  - AI
+>>>>>>> Stashed changes
   - 
   - 
   - 

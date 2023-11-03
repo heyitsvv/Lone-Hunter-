@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 6e8b43f1abfce6244b220c67fb6408a6
+=======
+guid: 0801faf79643b1848b3126d65d6819f4
+>>>>>>> Stashed changes
 timeCreated: 1503919948
 licenseType: Store
 ModelImporter:
@@ -202,5 +206,9 @@ AssetOrigin:
   productId: 99702
   packageName: Animal pack deluxe
   packageVersion: 1.0
+<<<<<<< Updated upstream
   assetPath: Assets/Animations/Bear/Bear_Idle.fbx
+=======
+  assetPath: Assets/Animal pack deluxe/Animations/Bear_Idle.fbx
+>>>>>>> Stashed changes
   uploadId: 259818
