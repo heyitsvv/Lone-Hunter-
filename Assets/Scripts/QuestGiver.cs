@@ -18,13 +18,8 @@ public class QuestGiver : MonoBehaviour
     public List<GameObject> buttons;
     public TextMeshProUGUI title;
 
-    private bool isComplete = false;
     private bool questActive = false;
 
-    // MISSION :
-    // 2. I don't think I need the Quest class
-    // 3. I want to make the button appear and dissapear
-    // 4. If the complete button is press, then change the descirption to another stuff
 
     public void Start()
     {
