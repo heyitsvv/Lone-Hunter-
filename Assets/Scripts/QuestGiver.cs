@@ -5,77 +5,30 @@ using UnityEngine;
 
 public class QuestGiver : MonoBehaviour
 {
+    public Quest quest;
     public PlayerMovement player;
-    public GameObject questPanel;
-    private List<int> clickedButtonIndices = new List<int>();
 
-    private string[] animals = { "Wolf" };
-    private string[] description = { "Venture out into the wild and kill ", "Hunt ", "Kill ", "Shoot "};
-    private int iRandom;
+    private string[] animals = { "Wolf", "Bear", "Cattle" };
+    private string[] Title = { "Next Quest", "Hunting Challenge", "On The Hunt" };
+    private int index;
+    private int numberKill;
 
-
-    public List<TextMeshProUGUI> descText;
-    public List<GameObject> buttons;
-    public TextMeshProUGUI title;
-
-    private bool questActive = false;
-
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI descText;
 
     public void Start()
     {
-        title.text = "On The Hunt";
-        for (int i = 0; i < descText.Count; i++)
-        {
-            DisplayQuestDescription(i);
-    
-        }
-
-        questPanel.SetActive(questActive);
-
+        titleText.text = quest.title;
+        descText.text = quest.description;
+        index = 0;
     }
 
-   
-    public void CompleteQuest(int index)
+    public void CompleteQuest()
     {
-        DisplayQuestDescription(index);
-    }
+        index = Random.Range(0, animals.Length);
+        numberKill = Random.Range(1, 2);
+        titleText.text = Title[index];
+        descText.text = "Venture out into the wild and kill " + numberKill + " " + animals[index];
 
-    public void ButtonClicked(int index)
-    {
-        if (!clickedButtonIndices.Contains(index))
-        {
-            clickedButtonIndices.Add(index);
-            Debug.Log("Button " + index + " was clicked!");
-
-        }
-
-        CompleteQuest(index);
-
-        print("Button " + index);
-    }
-
-    // Display different description for each quests
-    public void DisplayQuestDescription(int index)
-    {
-        if (string.IsNullOrWhiteSpace(descText[index].text))
-        {
-            descText[index].text = description[index];
-        }
-        else // Change the description when button is clicked
-        {
-            iRandom = Random.Range(0, description.Length);
-            descText[index].text = description[iRandom];
-
-            iRandom = Random.Range(1, 3);
-            descText[index].text += iRandom + " " + animals[0];
-        }
-
-    }
-
-    public void questWindow()
-    {
-        questActive = !questActive;
-        questPanel.SetActive(questActive);
-        
     }
 }

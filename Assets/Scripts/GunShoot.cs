@@ -5,7 +5,10 @@ public class GunShoot : MonoBehaviour
     public Camera playerCamera;
     public GameObject Gun;
     public float range = 100f; // How far the bullet can travel
-    
+    public float damage = 10f; // Damage to deal to the AI
+    public float aiMaxHealth = 100f; // AI's maximum health
+
+
 
     // For visualizing the bullet's path
     public LineRenderer bulletTrajectory;
@@ -24,6 +27,25 @@ public class GunShoot : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
         {
+            AIHealth aiHealth = hit.transform.GetComponent<AIHealth>();
+
+            if (aiHealth != null)
+            {
+                // Reduce the AI's health
+                aiHealth.TakeDamage(damage);
+
+                // Log the AI's remaining health
+                Debug.Log("AI has been shot! Remaining health: " + aiHealth.GetCurrentHealth() + "/" + aiMaxHealth);
+
+                // You can also check if the AI is dead and perform additional actions here
+                if (aiHealth.GetCurrentHealth() <= 0)
+                {
+                    // AI is dead, you can play death animations, destroy the AI, etc.
+                    Debug.Log("AI is dead!");
+                }
+
+            }
+
             // For now, we'll just log what we hit. You can expand on this.
             Debug.Log("Hit: " + hit.transform.name);
 
