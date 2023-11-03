@@ -774,6 +774,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1842979049671291624}
+  questPanel: {fileID: 1198309762}
   descText:
   - {fileID: 1660887796}
   - {fileID: 1287534081}
@@ -2802,6 +2803,10 @@ PrefabInstance:
       propertyPath: controller
       value: 
       objectReference: {fileID: 844957990}
+    - target: {fileID: 711245978067705797, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
+      propertyPath: questGiver
+      value: 
+      objectReference: {fileID: 416609178}
     - target: {fileID: 711245978067705797, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
       propertyPath: jumpChecker
       value: 
