@@ -386,71 +386,8 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.10454545
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.16363636
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.21818182
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.30454546
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.40454546
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.49545455
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5863636
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.6636364
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.73636365
-        functionName: StartAttack
-        data: 
-        objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.8181818
-        functionName: StartAttack
+      - time: 0.06878307
+        functionName: AttackPlayer
         data: 
         objectReferenceParameter: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
         floatParameter: 0

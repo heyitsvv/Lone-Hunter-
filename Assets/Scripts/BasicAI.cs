@@ -14,14 +14,14 @@ public class BasicAI : MonoBehaviour
     public int currentHealth;
 
     [Header("Attack Settings")]
-    public float damage = 10f;
-    public float attackCooldownTime = 1.0f; // Time between attacks
+    public float damage = 5f;
+    public float attackCooldownTime = 10.0f; // Time between attacks
 
     [Header("Movement")]
     public float wanderWaitTime = 10f;
     public float walkSpeed = 2f;
     public float runSpeed = 3.5f;
-    public float stoppingDistance = 2.0f; // Adjust this stopping distance
+    public float stoppingDistance = 8.0f; // Adjust this stopping distance
 
     private bool isAttacking;
     private bool isWandering = true;
@@ -47,6 +47,7 @@ public class BasicAI : MonoBehaviour
         // Set the initial destination within the wander area
         SetRandomDestinationInSphere();
     }
+
     private void Update()
     {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
@@ -75,6 +76,16 @@ public class BasicAI : MonoBehaviour
 
     private void ChaseAndAttack(float distanceToPlayer)
     {
+        if (player.GetComponent<PlayerHealth>().currentHealth <= 0)
+        {
+            // Player's health is zero or below, don't chase or attack
+            isWandering = true;
+            agent.speed = walkSpeed;
+            anim.SetBool("Run", false);
+            anim.SetBool("Walk", true);
+            return; // Exit the method, no further actions needed
+        }
+
         if (distanceToPlayer <= maxChaseDistance)
         {
             // Chase the player
@@ -105,22 +116,12 @@ public class BasicAI : MonoBehaviour
         anim.SetBool("Run", !isWandering);
     }
 
-    public void TakeDamageFromLineRenderer(int damage)
+    public void AttackPlayer()
     {
-        if (currentHealth > 0)
-        {
-            currentHealth -= damage;
-
-            if (currentHealth <= 0)
-            {
-                Die();
-            }
-
-            // Print the damage value to the console
-            Debug.Log("AI took " + damage + " damage from Line Renderer. Current health: " + currentHealth);
-        }
+        // Damage the player
+        player.GetComponent<PlayerHealth>().TakeDamage((int)damage);
+        // You can add more attack-related logic here
     }
-
 
     public void StartAttack()
     {
@@ -172,15 +173,5 @@ public class BasicAI : MonoBehaviour
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += center;
         return randomDirection;
-    }
-
-    private void Die()
-    {
-        // Implement AI's death logic here, such as playing death animations, removing the AI, etc.
-        Debug.Log("AI has died.");
-        // You can also disable the AI's components or GameObject to stop it from functioning.
-        agent.enabled = false;
-        // Optionally, destroy the AI GameObject after a delay.
-        Destroy(gameObject, 2f);
     }
 }
