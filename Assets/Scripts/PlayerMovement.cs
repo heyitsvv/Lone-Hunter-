@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -30f;
 
     public GameObject quest;
-    private QuestGiver questGiver;
+    public QuestGiver questGiver;
     private bool questActive = false;
 
     Rigidbody rb;
@@ -64,7 +64,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             questActive = !questActive;
+
             quest.SetActive(questActive);
+            questGiver.questWindow(questActive);
+            questGiver.ToggleCursorState();
         }
 
 
