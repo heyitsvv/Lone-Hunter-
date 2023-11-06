@@ -2863,32 +2863,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1728995500743121901, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
   m_PrefabInstance: {fileID: 1842979049671291623}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &844957990
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844957983}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &844957996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7777,11 +7751,15 @@ PrefabInstance:
     - target: {fileID: 711245978067705797, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
       propertyPath: controller
       value: 
-      objectReference: {fileID: 844957990}
+      objectReference: {fileID: 0}
     - target: {fileID: 711245978067705797, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
       propertyPath: questGiver
       value: 
       objectReference: {fileID: 416609178}
+    - target: {fileID: 711245978067705797, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 64007595}
     - target: {fileID: 711245978067705797, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
       propertyPath: jumpChecker
       value: 
@@ -7843,6 +7821,10 @@ PrefabInstance:
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3272191084217908389, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272191084217908389, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
       propertyPath: m_ImplicitCom
       value: 1
       objectReference: {fileID: 0}
@@ -7887,9 +7869,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
       insertIndex: 4
       addedObject: {fileID: 844957996}
-    - targetCorrespondingSourceObject: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 844957990}
     - targetCorrespondingSourceObject: {fileID: 4422323524144029500, guid: c41d7500fb855014ea0eb130b44404eb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 844957997}
