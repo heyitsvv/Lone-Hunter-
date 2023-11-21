@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +5,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
+
     public GameObject healthBar;
     public Slider slider;
     private Image bar;
@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+
         slider = healthBar.GetComponent<Slider>();
         bar = healthBar.transform.Find("Bar").GetComponent<Image>();
         bar.color = new Color32(113, 219, 113, 255);
