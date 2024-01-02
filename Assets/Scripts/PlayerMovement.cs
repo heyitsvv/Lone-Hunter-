@@ -5,71 +5,58 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
+    private Rigidbody rb;
     public float speed = 8f;
-    public float gravity = -30f;
+    public float jumpHeight = 2f; // Adjust this value for jump height
 
-    public GameObject quest;
-    public QuestGiver questGiver;
-    private bool questActive = false;
+    public Transform groundCheck;
+    public float groundDistance = 0.4f; // Sphere radius for ground check
+    public LayerMask groundMask; // LayerMask to determine what constitutes ground
 
-    Rigidbody rb;
-    Vector3 velocity;
+    private Vector3 moveDirection;
+    private bool isGrounded;
+    private bool jumpRequest;
 
-    public Transform jumpChecker;
-    public LayerMask groundMask;
-    bool canJump;
-
-    private void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // Ensure that we don't rotate the player based on the physics simulation
         rb.freezeRotation = true;
-        quest.SetActive(questActive);
     }
 
-    // Update is called once per frame
     void Update()
-    {   
+    {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        moveDirection = (transform.right * x + transform.forward * z).normalized;
 
-        if (Input.GetKey(KeyCode.LeftShift) && canJump)
+        // Ground check
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            speed = 14f;
+            jumpRequest = true;
         }
-        else
+    }
+
+    void FixedUpdate()
+    {
+        MovePlayer();
+
+        if (jumpRequest)
         {
-            speed = 8f;
+            // Assuming you want to jump up to a certain height, calculate the required initial velocity
+            rb.AddForce(Vector3.up * Mathf.Sqrt(jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+            jumpRequest = false;
         }
+    }
 
-        controller.Move(move * speed * Time.deltaTime);
-        
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
-
-        canJump = Physics.CheckSphere(jumpChecker.position, 0.6f, groundMask);
-        if (velocity.y < 0 && canJump)
+    void MovePlayer()
+    {
+        if (moveDirection != Vector3.zero)
         {
-            velocity.y = 0f;
+            rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
         }
-
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
-        {
-            velocity.y = Mathf.Sqrt(6f * -2f * gravity);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            questActive = !questActive;
-
-            quest.SetActive(questActive);
-            questGiver.questWindow(questActive);
-            questGiver.ToggleCursorState();
-        }
-
-
     }
 }

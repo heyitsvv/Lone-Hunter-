@@ -9,7 +9,8 @@ public class PlayerLooking : MonoBehaviour
     public float Y_sensitivity = 300f;
     public Transform Player;
 
-    float xRotation = 0f;
+    private float xRotation = 0f;
+    private float mouseX, mouseY;
 
     // Start is called before the first frame update
     void Start()
@@ -21,14 +22,23 @@ public class PlayerLooking : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * X_sensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Y_sensitivity * Time.deltaTime;
+        // Capture the mouse input
+        mouseX = Input.GetAxisRaw("Mouse X") * X_sensitivity * Time.deltaTime;
+        mouseY = Input.GetAxisRaw("Mouse Y") * Y_sensitivity * Time.deltaTime;
 
+        // Calculate the x rotation (vertical looking) but don't apply it yet
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+    }
 
+    // LateUpdate is called after all Update methods
+    void LateUpdate()
+    {
+        // Apply the x rotation (vertical looking)
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
+        // Apply the y rotation (horizontal looking) around the Y axis
         Player.Rotate(Vector3.up * mouseX);
     }
 }
+
