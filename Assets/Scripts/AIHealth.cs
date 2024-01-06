@@ -4,6 +4,7 @@ public class AIHealth : MonoBehaviour
 {
     public float maxHealth = 100f;
     private float currentHealth;
+    private bool dead = false;
 
     void Start()
     {
@@ -14,7 +15,7 @@ public class AIHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !dead)
         {
             Die();
         }
@@ -25,9 +26,13 @@ public class AIHealth : MonoBehaviour
         return currentHealth;
     }
 
-    void Die()
+    public bool IsDead()
     {
-        // Implement what happens when the AI dies (e.g., play death animation, remove AI from the scene, etc.).
-        Destroy(gameObject);
+        return dead;
+    }
+
+    private void Die()
+    {
+        dead = true;
     }
 }

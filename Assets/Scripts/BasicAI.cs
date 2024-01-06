@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,8 +9,8 @@ public class BasicAI : MonoBehaviour
     private Animator anim;
 
     [Header("Health Settings")]
-    public int maxHealth = 100;
-    public int currentHealth;
+    public AIHealth aiHealth; // Reference to AIHealth script
+    public bool dead;
 
     [Header("Attack Settings")]
     public float damage = 5f;
@@ -22,6 +21,9 @@ public class BasicAI : MonoBehaviour
     public float walkSpeed = 2f;
     public float runSpeed = 3.5f;
     public float stoppingDistance = 8.0f; // Adjust this stopping distance
+
+    [Header("Drop Settings")]
+    public GameObject gatherableItemPrefab;
 
     private bool isAttacking;
     private bool isWandering = true;
@@ -35,9 +37,9 @@ public class BasicAI : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = stoppingDistance; // Set the stopping distance
         anim = GetComponent<Animator>();
         detectionCollider = GetComponent<SphereCollider>(); // Get the SphereCollider component
+        aiHealth = GetComponent<AIHealth>(); // Get the AIHealth component
 
         // Use the collider's radius to determine the maximum chase distance
         maxChaseDistance = detectionCollider.radius;
@@ -50,6 +52,15 @@ public class BasicAI : MonoBehaviour
 
     private void Update()
     {
+        // Update the dead boolean based on AIHealth script
+        dead = aiHealth.IsDead();
+
+        if (dead)
+        {
+            Die();
+            return; // Exit the method if the animal is dead
+        }
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (isWandering)
@@ -137,6 +148,43 @@ public class BasicAI : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldownTime);
         isAttacking = false;
+    }
+
+    private void Die()
+    {
+        DropGatherableItem();
+        // You can add more death-related logic here
+        Destroy(gameObject); // Destroy the animal GameObject
+    }
+
+    private void DropGatherableItem()
+    {
+       if (gatherableItemPrefab != null && aiHealth != null)
+       {
+        // Get the position where the animal has died
+            Vector3 deathPosition = transform.position;
+
+        // Add a small offset in the y-axis (3 cm up)
+            deathPosition.y += 1.00f;
+
+        // Instantiate the gatherable item at the modified position
+            GameObject droppedItem = Instantiate(gatherableItemPrefab, deathPosition, Quaternion.identity);
+
+        // Assuming your GatherableItem script is attached to the prefab and has a DropToGround method
+            GatherableItem gatherableItem = droppedItem.GetComponent<GatherableItem>();
+            if (gatherableItem != null)
+            {
+                gatherableItem.DropToGround(deathPosition);
+            }
+            else
+            {
+                Debug.LogError("GatherableItem script not found on the prefab.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Gatherable item prefab or AIHealth reference not found.");
+        }
     }
 
     private void SetRandomDestinationInSphere()
