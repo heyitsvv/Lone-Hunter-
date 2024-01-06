@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+
+
 
 public class GatherableItem : MonoBehaviour
 {
@@ -16,10 +19,12 @@ public class GatherableItem : MonoBehaviour
         transform.position = position;
         GetComponent<Collider>().enabled = true;
 
+        // You can add additional effects or animations here
+
         Debug.Log("Item dropped to ground at position: " + position);
     }
 
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (isGathered)
             return;
@@ -35,11 +40,18 @@ public class GatherableItem : MonoBehaviour
     {
         if (inventoryToggle != null)
         {
-
+            // Toggle the inventory to show the gathered item
             inventoryToggle.ToggleInventory();
-            
+
+            // You can add the gathered item to the inventory here
+            // For example, you might instantiate an item in the inventory UI
+            // and set its icon or update a counter for the item.
 
             isGathered = true;
+
+            // You can add additional effects or animations here
+
+            // Destroy the gatherable object after it's gathered
             StartCoroutine(DestroyAfterDelay(0.5f));
         }
         else
@@ -48,7 +60,7 @@ public class GatherableItem : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator DestroyAfterDelay(float delay)
+    private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
