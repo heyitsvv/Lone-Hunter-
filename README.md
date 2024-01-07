@@ -17,3 +17,7 @@ Rad-Coders - Low Poly: Woods Lifestyle - https://assetstore.unity.com/packages/3
 Simple Foods - Bubba - https://assetstore.unity.com/packages/3d/props/food/simple-foods-207032
 
 janpec - Animal pack deluxe - https://assetstore.unity.com/packages/3d/characters/animals/animal-pack-deluxe-99702
+
+Black Hammer - Fantasy Wooden GUI - https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811
+
+Game Stuff Studio - M40A3 Sniper Rifle - https://assetstore.unity.com/packages/3d/props/weapons/m40a3-sniper-rifle-107756
