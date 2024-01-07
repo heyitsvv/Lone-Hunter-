@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,24 +9,26 @@ public class BasicAI : MonoBehaviour
     private Animator anim;
 
     [Header("Health Settings")]
-    public int maxHealth = 100;
-    public int currentHealth;
+    public AIHealth aiHealth; // Reference to AIHealth script
+    public bool dead;
 
     [Header("Attack Settings")]
-    public float damage = 5f;
+    public float damage = 15f;
     public float attackCooldownTime = 10.0f; // Time between attacks
 
     [Header("Movement")]
     public float wanderWaitTime = 10f;
     public float walkSpeed = 2f;
     public float runSpeed = 3.5f;
-    public float stoppingDistance = 8.0f; // Adjust this stopping distance
+    public float wanderingRange = 20f; // The range for wandering
+    public float minWalkDistance = 10f; // Minimum distance to walk before setting a new destination
+
+    [Header("Drop Settings")]
+    public GameObject gatherableItemPrefab;
 
     private bool isAttacking;
     private bool isWandering = true;
     private Vector3 currentDestination;
-
-    private float currentWanderTime;
 
     private SphereCollider detectionCollider; // SphereCollider for detecting the player
     private float maxChaseDistance; // Maximum chase distance based on collider radius
@@ -35,21 +36,28 @@ public class BasicAI : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.stoppingDistance = stoppingDistance; // Set the stopping distance
         anim = GetComponent<Animator>();
         detectionCollider = GetComponent<SphereCollider>(); // Get the SphereCollider component
+        aiHealth = GetComponent<AIHealth>(); // Get the AIHealth component
 
         // Use the collider's radius to determine the maximum chase distance
         maxChaseDistance = detectionCollider.radius;
 
-        currentWanderTime = wanderWaitTime;
-
-        // Set the initial destination within the wander area
-        SetRandomDestinationInSphere();
+        // Set the initial destination within the wandering range
+        SetRandomDestinationInWanderingRange();
     }
 
     private void Update()
     {
+        // Update the dead boolean based on AIHealth script
+        dead = aiHealth.IsDead();
+
+        if (dead)
+        {
+            Die();
+            return; // Exit the method if the animal is dead
+        }
+
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (isWandering)
@@ -66,11 +74,19 @@ public class BasicAI : MonoBehaviour
     {
         UpdateAnimations();
 
-        // Check if the AI has reached its destination
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        // Check if the player is within the chase distance
+        if (distanceToPlayer <= maxChaseDistance)
         {
-            // The AI has reached its destination, so set a new random destination
-            SetRandomDestinationInSphere();
+            isWandering = false;
+            agent.speed = runSpeed;
+            anim.SetBool("Walk", false);
+            anim.SetBool("Run", true);
+            SetChaseDestination();
+        }
+        else if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        {
+            // The AI has reached its destination, so set a new random destination within the wandering range
+            StartCoroutine(WaitAndSetNewDestination());
         }
     }
 
@@ -83,30 +99,31 @@ public class BasicAI : MonoBehaviour
             agent.speed = walkSpeed;
             anim.SetBool("Run", false);
             anim.SetBool("Walk", true);
+            SetRandomDestinationInWanderingRange();
             return; // Exit the method, no further actions needed
         }
 
-        if (distanceToPlayer <= maxChaseDistance)
+        if (distanceToPlayer <= agent.stoppingDistance)
         {
-            // Chase the player
-            agent.SetDestination(player.position);
-            agent.speed = runSpeed;
-            anim.SetBool("Walk", false);
-            anim.SetBool("Run", true);
-
-            if (distanceToPlayer <= agent.stoppingDistance)
+            // The player is within attack range, so transition to the attack animation
+            if (!isAttacking)
             {
-                // The player is within attack range, so transition to the attack animation
                 anim.SetTrigger("Attack");
             }
         }
-        else
+        else if (distanceToPlayer > maxChaseDistance)
         {
-            // Stop chasing and go back to wandering
+            // Player is outside the chase distance, go back to wandering
             isWandering = true;
             agent.speed = walkSpeed;
             anim.SetBool("Run", false);
             anim.SetBool("Walk", true);
+            SetRandomDestinationInWanderingRange();
+        }
+        else
+        {
+            // Continue chasing the player
+            agent.SetDestination(player.position);
         }
     }
 
@@ -139,39 +156,79 @@ public class BasicAI : MonoBehaviour
         isAttacking = false;
     }
 
-    private void SetRandomDestinationInSphere()
+    private void Die()
     {
-        // Generate a random point within the specified sphere collider's bounds
-        Vector3 randomPointInSphere = RandomPointInSphere(detectionCollider.transform.position, detectionCollider.radius);
+        DropGatherableItem();
+        // You can add more death-related logic here
+        Destroy(gameObject); // Destroy the animal GameObject
+    }
 
-        // Ensure the point is within the sphere collider
+    private void DropGatherableItem()
+    {
+        if (gatherableItemPrefab != null && aiHealth != null)
+        {
+            // Get the position where the animal has died
+            Vector3 deathPosition = transform.position;
+
+            // Add a small offset in the y-axis (3 cm up)
+            deathPosition.y += 1.00f;
+
+            // Instantiate the gatherable item at the modified position
+            GameObject droppedItem = Instantiate(gatherableItemPrefab, deathPosition, Quaternion.identity);
+
+            // Assuming your GatherableItem script is attached to the prefab and has a DropToGround method
+            GatherableItem gatherableItem = droppedItem.GetComponent<GatherableItem>();
+            if (gatherableItem != null)
+            {
+                gatherableItem.DropToGround(deathPosition);
+            }
+            else
+            {
+                Debug.LogError("GatherableItem script not found on the prefab.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Gatherable item prefab or AIHealth reference not found.");
+        }
+    }
+
+    private void SetChaseDestination()
+    {
+        // Set the destination to the player's position for chasing
+        agent.SetDestination(player.position);
+    }
+
+    private void SetRandomDestinationInWanderingRange()
+    {
+        // Use physics to find a random point within the specified wandering range
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPointInSphere, out hit, detectionCollider.radius, NavMesh.AllAreas))
+        Vector3 randomDirection = Random.onUnitSphere * wanderingRange;
+        randomDirection += transform.position;
+        randomDirection.y = transform.position.y; // Keep the y-coordinate the same as the current position
+
+        if (NavMesh.SamplePosition(randomDirection, out hit, wanderingRange, NavMesh.AllAreas))
         {
             currentDestination = hit.position;
 
             agent.autoTraverseOffMeshLink = true;
-
             agent.SetDestination(currentDestination);
 
             float distanceToDestination = Vector3.Distance(transform.position, currentDestination);
-            if (distanceToDestination > 5.0f)
+            if (distanceToDestination > minWalkDistance)
             {
-                agent.speed = runSpeed;
-                isWandering = false;
+                agent.speed = walkSpeed;
             }
             else
             {
-                agent.speed = walkSpeed;
-                isWandering = true;
+                StartCoroutine(WaitAndSetNewDestination());
             }
         }
     }
 
-    private Vector3 RandomPointInSphere(Vector3 center, float radius)
+    private IEnumerator WaitAndSetNewDestination()
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += center;
-        return randomDirection;
+        yield return new WaitForSeconds(wanderWaitTime);
+        SetRandomDestinationInWanderingRange();
     }
 }
