@@ -8,49 +8,83 @@ public class QuestGiver : MonoBehaviour
     public Quest quest;
     public PlayerMovement player;
 
-    private string[] animals = { "Wolf"};
-    private string[] Title = { "Next Quest", "Hunting Challenge", "On The Hunt" };
-    private int index;
-    private int numberKill;
-    private bool isQuestOpen;
+    private string[] animals = { "Wolf", "Cattle" };
+    private string[] huntVerbs = { "Venture out into the wild and kill", "Hunt", "Collect meats from",
+                                   "Hunt and gather the products from" };
+    private string[] gatherVerbs = { "Gather", "Collect", "Retrieve" };
+    private string[] locations = { "the forest", "the rock mountains" };
 
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descText;
 
     public void Start()
     {
-        isQuestOpen = false;
         titleText.text = quest.title;
-        descText.text = quest.description;
-        index = 0;
+        GenerateQuestDescription();
     }
 
     public void CompleteQuest()
     {
-        index = Random.Range(0, animals.Length);
-        numberKill = Random.Range(1, 4);
-        titleText.text = Title[index];
-        descText.text = "Venture out into the wild and kill " + numberKill + " " + animals[0];
-
+        GenerateQuestDescription();
     }
 
-
-    public void questWindow (bool state)
+    // Animal:0, description:1, numberkill:2
+    // Another animal:3(Yes), 4(No)
+    private int randomNumber(int x)
     {
-        isQuestOpen = state;
-    }
-
-    public void ToggleCursorState()
-    {
-        if (isQuestOpen)
+        if (x == 0)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            return Random.Range(0, animals.Length);
+        }
+        else if (x == 1)
+        {
+            return Random.Range(0, huntVerbs.Length);
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            return Random.Range(1, 4);
         }
+    }
+
+    private void GenerateQuestDescription()
+    {
+        int animalIndex1 = randomNumber(0);
+        int animalIndex2;
+
+        // Ensure that the second animal is different from the first
+        do
+        {
+            animalIndex2 = randomNumber(0);
+        } while (animalIndex2 == animalIndex1);
+
+        int verbIndex = randomNumber(1);
+        int number1 = randomNumber(2);
+        int number2 = randomNumber(2);
+        int locationIndex = Random.Range(0, locations.Length);
+
+        // Determine whether to display one or two animals
+        string animalsDescription;
+
+        if (randomNumber(3) == 3)
+        {
+            animalsDescription = $"{number1} {animals[animalIndex1]} and {number2} {animals[animalIndex2]}";
+        }
+        else
+        {
+            animalsDescription = (number1 == 1) ? $"{number1} {animals[animalIndex1]}" : $"{number1} {animals[animalIndex1]} and {number2} {animals[animalIndex2]}";
+        }
+
+        string description;
+
+        if (verbIndex < huntVerbs.Length)
+        {
+            description = $"{huntVerbs[verbIndex]} {animalsDescription} in {locations[locationIndex]}.";
+        }
+        else
+        {
+            description = $"{gatherVerbs[verbIndex - huntVerbs.Length]} {animalsDescription} from {locations[locationIndex]}.";
+        }
+
+        descText.text = description;
     }
 }
