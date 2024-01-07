@@ -8027,7 +8027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 963194227}
   Gun: {fileID: 852298446}
-  range: 40
+  range: 60
   damage: 10
   aiMaxHealth: 100
   bulletTrajectory: {fileID: 149626221}
