@@ -159,45 +159,33 @@ public class BasicAI : MonoBehaviour
 
     private void DropGatherableItem()
     {
-     if (gatherableItemPrefab != null && aiHealth != null)
-     {
+       if (gatherableItemPrefab != null && aiHealth != null)
+       {
         // Get the position where the animal has died
-        Vector3 deathPosition = transform.position;
+            Vector3 deathPosition = transform.position;
 
         // Add a small offset in the y-axis (3 cm up)
-        deathPosition.y += 0.03f; // 0.03 meters is 3 cm
-        GetComponent<Collider>().enabled = true;
+            deathPosition.y += 1.00f;
 
         // Instantiate the gatherable item at the modified position
-        GameObject droppedItem = Instantiate(gatherableItemPrefab, deathPosition, Quaternion.identity);
+            GameObject droppedItem = Instantiate(gatherableItemPrefab, deathPosition, Quaternion.identity);
 
-        // Ensure the cloned item has the required components and tag
-        GatherableItem gatherableItem = droppedItem.GetComponent<GatherableItem>();
-        Collider collider = droppedItem.GetComponent<Collider>();
-
-        if (gatherableItem == null)
-        {
-            Debug.LogError("GatherableItem script not found on the cloned item.");
-            Destroy(droppedItem); // Destroy the cloned item if it doesn't have the script
-            return;
+        // Assuming your GatherableItem script is attached to the prefab and has a DropToGround method
+            GatherableItem gatherableItem = droppedItem.GetComponent<GatherableItem>();
+            if (gatherableItem != null)
+            {
+                gatherableItem.DropToGround(deathPosition);
+            }
+            else
+            {
+                Debug.LogError("GatherableItem script not found on the prefab.");
+            }
         }
-
-        if (collider == null)
+        else
         {
-            Debug.LogError("Collider not found on the cloned item. Adding a BoxCollider by default.");
-            collider = droppedItem.AddComponent<BoxCollider>(); // Add a BoxCollider if not found
+            Debug.LogError("Gatherable item prefab or AIHealth reference not found.");
         }
-
-        collider.enabled = true; // Enable the collider
-
-        gatherableItem.DropToGround(deathPosition);
-      }
-      else
-      {
-        Debug.LogError("Gatherable item prefab or AIHealth reference not found.");
     }
-}
-
 
     private void SetRandomDestinationInSphere()
     {
