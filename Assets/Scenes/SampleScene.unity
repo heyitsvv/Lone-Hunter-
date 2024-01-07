@@ -1399,7 +1399,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   aiHealth: {fileID: 77280615}
   dead: 0
-  damage: 15
+  damage: 20
   attackCooldownTime: 10
   wanderWaitTime: 1
   walkSpeed: 4
@@ -3398,7 +3398,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &149679818
 MonoBehaviour:
@@ -3416,7 +3416,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   aiHealth: {fileID: 149679815}
   dead: 0
-  damage: 15
+  damage: 30
   attackCooldownTime: 10
   wanderWaitTime: 1
   walkSpeed: 4
@@ -5624,15 +5624,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4295128007928967327, guid: ba43438e580714421b77702924702e2b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.3605847
+      value: 1.3792098
       objectReference: {fileID: 0}
     - target: {fileID: 4295128007928967327, guid: ba43438e580714421b77702924702e2b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.3605847
+      value: 1.3792098
       objectReference: {fileID: 0}
     - target: {fileID: 4295128007928967327, guid: ba43438e580714421b77702924702e2b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.3605847
+      value: 1.3792098
       objectReference: {fileID: 0}
     - target: {fileID: 4295128007928967327, guid: ba43438e580714421b77702924702e2b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5644,7 +5644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4295128007928967327, guid: ba43438e580714421b77702924702e2b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.32
+      value: -2.6171
       objectReference: {fileID: 0}
     - target: {fileID: 4295128007928967327, guid: ba43438e580714421b77702924702e2b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7027,7 +7027,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &651409770
 MonoBehaviour:
@@ -7045,7 +7045,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   aiHealth: {fileID: 651409767}
   dead: 0
-  damage: 15
+  damage: 30
   attackCooldownTime: 10
   wanderWaitTime: 1
   walkSpeed: 4
@@ -8027,7 +8027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 963194227}
   Gun: {fileID: 852298446}
-  range: 100
+  range: 60
   damage: 10
   aiMaxHealth: 100
   bulletTrajectory: {fileID: 149626221}
@@ -9316,7 +9316,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &937697614
 MonoBehaviour:
@@ -9334,7 +9334,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   aiHealth: {fileID: 937697611}
   dead: 0
-  damage: 15
+  damage: 20
   attackCooldownTime: 10
   wanderWaitTime: 1
   walkSpeed: 4
@@ -10798,7 +10798,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &963504388
 MonoBehaviour:
@@ -16954,7 +16954,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1412037276
 MonoBehaviour:
@@ -18942,7 +18942,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1594163534
 MonoBehaviour:
@@ -18960,7 +18960,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   aiHealth: {fileID: 1594163531}
   dead: 0
-  damage: 15
+  damage: 30
   attackCooldownTime: 10
   wanderWaitTime: 1
   walkSpeed: 4
@@ -19427,11 +19427,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4060929856491668, guid: 17c92e8b373815b42a027aed891bc237, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 25.27
+      value: 24.97
       objectReference: {fileID: 0}
     - target: {fileID: 4060929856491668, guid: 17c92e8b373815b42a027aed891bc237, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 840.12
+      value: 840.11
       objectReference: {fileID: 0}
     - target: {fileID: 4060929856491668, guid: 17c92e8b373815b42a027aed891bc237, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20541,7 +20541,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1656483364
 MonoBehaviour:
@@ -20559,7 +20559,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   aiHealth: {fileID: 1656483361}
   dead: 0
-  damage: 15
+  damage: 30
   attackCooldownTime: 10
   wanderWaitTime: 1
   walkSpeed: 4
@@ -20989,15 +20989,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3653638860661541372, guid: 219e253d2043b4bf382f7fbe08130e26, type: 3}
       propertyPath: m_LocalScale.x
-      value: 5.0720816
+      value: 3.996141
       objectReference: {fileID: 0}
     - target: {fileID: 3653638860661541372, guid: 219e253d2043b4bf382f7fbe08130e26, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.0720816
+      value: 3.996141
       objectReference: {fileID: 0}
     - target: {fileID: 3653638860661541372, guid: 219e253d2043b4bf382f7fbe08130e26, type: 3}
       propertyPath: m_LocalScale.z
-      value: 5.0720816
+      value: 3.996141
       objectReference: {fileID: 0}
     - target: {fileID: 3653638860661541372, guid: 219e253d2043b4bf382f7fbe08130e26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22026,7 +22026,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1739229668
 MonoBehaviour:
@@ -22044,7 +22044,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   aiHealth: {fileID: 1739229665}
   dead: 0
-  damage: 15
+  damage: 20
   attackCooldownTime: 10
   wanderWaitTime: 1
   walkSpeed: 4
@@ -23851,7 +23851,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1865353661
 MonoBehaviour:
@@ -23869,7 +23869,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   aiHealth: {fileID: 1865353658}
   dead: 0
-  damage: 15
+  damage: 30
   attackCooldownTime: 10
   wanderWaitTime: 1
   walkSpeed: 4
