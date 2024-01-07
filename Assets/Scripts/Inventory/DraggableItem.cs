@@ -24,16 +24,5 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
     }
-    
-   private InventorySlot originalSlot;
-
-    void Awake()
-    {
-        originalSlot = GetComponentInParent<InventorySlot>();
-    }
-
-    public InventorySlot GetOriginalSlot()
-    {
-        return originalSlot;
-    }
+   
 }
