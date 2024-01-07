@@ -22,6 +22,7 @@ public class CattleAI : MonoBehaviour
     public float runSpeed = 3.5f;
     public float wanderingRange = 20f; // The range for wandering
     public float minWalkDistance = 10f; // Minimum distance to walk before setting a new destination
+    public float fleeingDistance = 10f; // Distance to flee from the player
 
     [Header("Drop Settings")]
     public GameObject gatherableItemPrefab;
@@ -105,8 +106,8 @@ public class CattleAI : MonoBehaviour
 
         if (distanceToPlayer <= agent.stoppingDistance)
         {
-            // The player is within attack range, so transition to the attack animation
-            anim.SetTrigger("Attack");
+            // The player is within a certain distance, make the cattle run away
+            FleeFromPlayer();
         }
         else if (distanceToPlayer > maxChaseDistance)
         {
@@ -122,6 +123,24 @@ public class CattleAI : MonoBehaviour
             // Continue chasing the player
             agent.SetDestination(player.position);
         }
+    }
+
+    private void FleeFromPlayer()
+    {
+        // Calculate the direction away from the player
+        Vector3 fleeDirection = transform.position - player.position;
+
+        // Calculate the target position by adding the flee direction to the current position
+        Vector3 fleePosition = transform.position + fleeDirection.normalized * fleeingDistance;
+
+        // Set the destination for fleeing
+        agent.SetDestination(fleePosition);
+
+        // Play the run animation
+        isWandering = false;
+        agent.speed = runSpeed;
+        anim.SetBool("Walk", false);
+        anim.SetBool("Run", true);
     }
 
     private void SetChaseDestination()
