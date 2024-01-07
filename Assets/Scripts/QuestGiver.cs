@@ -16,16 +16,36 @@ public class QuestGiver : MonoBehaviour
 
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descText;
+    public TextMeshProUGUI levelText;
+
+    private int count = 0;
+    private int questNumber = 2;
+    private int levelNumber = 1;
 
     public void Start()
     {
-        titleText.text = quest.title;
+        titleText.text = "Level " + levelNumber;
+        levelText.text = "(Level Advancement: " + count + "/" + questNumber + " quest completed)";
         GenerateQuestDescription();
     }
 
     public void CompleteQuest()
     {
         GenerateQuestDescription();
+        count += 1;
+        if (count == questNumber)
+        {
+            levelNumber += 1;
+            titleText.text = titleText.text = quest.title + " : Level " + levelNumber;
+            count = 0;
+
+            questNumber = Random.Range(3, questNumber+3);
+            levelText.text = "(Level Advancement: " + count + "/" + questNumber + " completed)";
+        }
+        else
+        {
+            levelText.text = "(Level Advancement: " + count + "/" + questNumber + " completed)";
+        }
     }
 
     // Animal:0, description:1, numberkill:2
