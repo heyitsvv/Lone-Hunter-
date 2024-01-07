@@ -38,6 +38,15 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpRequest = true;
         }
+
+        if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
+        {
+            speed = 14f;
+        }
+        else
+        {
+            speed = 8f;
+        }
     }
 
     void FixedUpdate()
