@@ -21,3 +21,15 @@ janpec - Animal pack deluxe - https://assetstore.unity.com/packages/3d/character
 Black Hammer - Fantasy Wooden GUI - https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811
 
 Game Stuff Studio - M40A3 Sniper Rifle - https://assetstore.unity.com/packages/3d/props/weapons/m40a3-sniper-rifle-107756
+
+Worn wooden crate - https://assetstore.unity.com/packages/3d/props/furniture/worn-wooden-crate-246735
+
+Military target - https://assetstore.unity.com/packages/3d/environments/military-target-136071
+
+Fantasy Forest Environment - Free Demo - https://assetstore.unity.com/packages/3d/environments/fantasy/fantasy-forest-environment-free-demo-35361
+
+Terrain Sample Asset Pack - https://assetstore.unity.com/packages/3d/environments/landscapes/terrain-sample-asset-pack-145808
+
+Dream Forest Tree - https://assetstore.unity.com/packages/3d/vegetation/trees/dream-forest-tree-105297
+
+
