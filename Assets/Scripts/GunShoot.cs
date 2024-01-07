@@ -4,19 +4,20 @@ public class GunShoot : MonoBehaviour
 {
     public Camera playerCamera;
     public GameObject Gun;
-    public float range = 100f; // How far the bullet can travel
-    public float damage = 10f; // Damage to deal to the AI
+    public float range = 15f; // How far the bullet can travel
+    public float damage = 15f; // Damage to deal to the AI
     public float aiMaxHealth = 100f; // AI's maximum health
-
-
 
     // For visualizing the bullet's path
     public LineRenderer bulletTrajectory;
     public float trajectoryDisplayDuration = 1f; // Duration for which the trajectory is shown
 
+    public float shootCooldown = 0.5f; // Cooldown time in seconds
+    private float lastShotTime = -Mathf.Infinity; // Initialize to negative infinity to allow immediate first shot
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.time - lastShotTime >= shootCooldown)
         {
             Shoot();
         }
@@ -24,6 +25,13 @@ public class GunShoot : MonoBehaviour
 
     void Shoot()
     {
+        // Check if enough time has passed since the last shot
+        if (Time.time - lastShotTime < shootCooldown)
+        {
+            // Still in cooldown, don't shoot
+            return;
+        }
+
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
         {
@@ -43,7 +51,6 @@ public class GunShoot : MonoBehaviour
                     // AI is dead, you can play death animations, destroy the AI, etc.
                     Debug.Log("AI is dead!");
                 }
-
             }
 
             // For now, we'll just log what we hit. You can expand on this.
@@ -51,6 +58,9 @@ public class GunShoot : MonoBehaviour
 
             // Display the bullet's path
             ShowBulletTrajectory(playerCamera.transform.position, hit.point);
+
+            // Update the last shot time
+            lastShotTime = Time.time;
         }
         else
         {
