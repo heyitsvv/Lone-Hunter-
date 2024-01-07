@@ -6,6 +6,8 @@ using System.Collections;
 public class GatherableItem : MonoBehaviour
 {
     private bool isGathered = false;
+    public Inventory inventory;
+    public Item item;
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class GatherableItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Gather(other.GetComponent<InventoryToggle>());
+            
         }
     }
 
@@ -46,6 +49,10 @@ public class GatherableItem : MonoBehaviour
             // You can add the gathered item to the inventory here
             // For example, you might instantiate an item in the inventory UI
             // and set its icon or update a counter for the item.
+
+        
+            inventory.AddItem(item);
+            
 
             isGathered = true;
 
